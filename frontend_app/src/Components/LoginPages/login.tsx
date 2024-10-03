@@ -10,28 +10,37 @@ export default function Login(props:any) {
         props.setLogin(false)
     }
 
-    const Login = async (e:any) =>{
+    const Login = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        try{
-            const response = await fetch("http://localhost:3000/users/login",{
-                method:"POST",
-                headers:{'Content-type':'application/json'},
-                body:JSON.stringify({
-                    email,
-                    password,
+        try {
+            const response = await fetch("http://localhost:3001/users/login", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email, 
+                    password 
                 })
-            })
+            });
+    
             const data = await response.json();
-            if(response.ok){
-                if(data.message === "succes")
-                {
+            console.log("data : ",data);
+            
+            if (response.ok) {
+                if (data.message === "succes") {
                     navigate("/Home");
+                } else {
+                    console.log("Login failed: Invalid credentials");
                 }
+            } else {
+                console.error(`Error: ${response.status} ${response.statusText}`);
             }
-        }catch(e){
-            console.log(e);
+        } catch (error) {
+            console.error("Login error:", error);
         }
-    }
+    };
+    
     return (
         <div className='flex flex-col items-center m-12 w-full'>
         <form className='w-full flex flex-col items-center gap-7' onSubmit={Login}>

@@ -11,36 +11,36 @@ services:
     networks:
     - web_app_challenge
     restart: on-failure
-  ######### BACKEND #########
-  backend:
-    build:
-      context: ./backend_app
-    image: backend
-    container_name: backend
-    ports:
-    - "3000:3000"
-    depends_on: 
-      - postgres
-    env_file: 
-    - .env
-    networks:
-    - web_app_challenge
-    restart: on-failure
-  ######### FRONTEND #########
-  frontend:
-    build:
-      context: frontend_app
-    image: frontend
-    container_name: frontend
-    depends_on: 
-     - backend
-    env_file: 
-    - .env
-    ports:
-    - "5173:5173"
-    networks:
-    - web_app_challenge
-    restart: on-failure
+  # ######### BACKEND #########
+  # backend:
+  #   build:
+  #     context: ./backend_app
+  #   image: backend
+  #   container_name: backend
+  #   ports:
+  #   - "3000:3000"
+  #   depends_on: 
+  #     - postgres
+  #   env_file: 
+  #   - .env
+  #   networks:
+  #   - web_app_challenge
+  #   restart: on-failure
+  # ######### FRONTEND #########
+  # frontend:
+  #   build:
+  #     context: frontend_app
+  #   image: frontend
+  #   container_name: frontend
+  #   depends_on: 
+  #    - backend
+  #   env_file: 
+  #   - .env
+  #   ports:
+  #   - "5173:5173"
+  #   networks:
+  #   - web_app_challenge
+  #   restart: on-failure
  
 networks:
   web_app_challenge:

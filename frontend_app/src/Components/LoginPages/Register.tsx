@@ -14,7 +14,7 @@ export default function Register(props:any) {
     const Register = async(e:any) => {
       e.preventDefault();
       try{
-        const response = await fetch("http://localhost:3000/users/register",{
+        const response = await fetch("http://localhost:3001/users/register",{
             method:"POST",
             headers:{'Content-type':'application/json'},
             body:JSON.stringify({
