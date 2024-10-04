@@ -20,8 +20,6 @@ export default function Home() {
     setAddC(true);
   }
 
-
-
   useEffect(() => {
     const uploadFile = async () => {
         try {
