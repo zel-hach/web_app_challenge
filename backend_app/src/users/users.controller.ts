@@ -16,6 +16,7 @@ export class UserController {
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
     const result = await this.userService.create(createUserDto);
+    // console.log(result);
     if (result === 0) {
       throw new InternalServerErrorException('User already exists');
     }
