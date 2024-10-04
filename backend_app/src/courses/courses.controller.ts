@@ -6,7 +6,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('courses')
 export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
