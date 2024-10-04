@@ -26,11 +26,12 @@ export default function Login(props:any) {
     
             const data = await response.json();
             console.log("data : ",data);
-            
+            sessionStorage.setItem("token",data.accessTocken);
             if (response.ok) {
                 if (data.message === "succes") {
                     navigate("/Home");
                 } else {
+                    alert("you are not registered ,can you register please !")
                     console.log("Login failed: Invalid credentials");
                 }
             } else {

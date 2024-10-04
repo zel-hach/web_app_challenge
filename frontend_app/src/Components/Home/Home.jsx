@@ -3,12 +3,14 @@ import ListeOfCourse from './ListeOfCourse'
 import AddCourse from './AddCourse'
 import Popup from 'reactjs-popup';
 import axios from 'axios';
-
+import data from './../../assets/courses_data.json'
 
 export default function Home() {
   const [addC,setAddC] = useState(false);
   const [text,setText] = useState("");
   const [filtersearch ,setFilterSearch] = useState([]);
+
+  const token = sessionStorage.getItem("token");
 
   const onclose = () =>{
     setAddC(false);
@@ -17,6 +19,8 @@ export default function Home() {
   const openPopup = () =>{
     setAddC(true);
   }
+
+
 
   useEffect(() => {
     const uploadFile = async () => {
@@ -27,13 +31,14 @@ export default function Home() {
             formData.append('file', jsonBlob, 'courses_data.json'); 
             const uploadResponse = await axios.post('http://localhost:3001/courses/upload', formData, {
                 headers: {
+                  Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
                 },
             });
 
             console.log('File uploaded successfully:');
                    } catch (error) {
-            // console.error('Error uploading file:', error);
+            console.error('Error uploading file:', error);
         }
     };
     uploadFile();
@@ -47,7 +52,14 @@ const [loading, setLoading] = useState(false);
 const fetchCourses = async () => {
     setLoading(true);
     try {
-        const response = await axios.get(`http://localhost:3001/courses?page=${page}`);
+        const response = await axios.get(`http://localhost:3001/courses?page=${page}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
         console.log("response: ",response);
         if (Array.isArray(response.data.data)) {
             setCourses(prev => [...prev, ...response.data.data]); 
@@ -85,12 +97,12 @@ const SearchCourse = () =>{
 
   return (
     <div className='m-auto'>
-      <div className='flex justify-between items-center'>
-        <h1 className=' flex justify-start cursor-pointer bg-[#1fb5a9] rounded p-3' onClick={openPopup}>New course</h1>
-        <div className='flex gap-1'>
+       <div className='flex justify-end gap-1'>
         <input type='text' placeholder="search" className='p-2' onChange={setSearch}></input>
         <button className='p-2 rounded bg-[#1fb5a9]' onClick={SearchCourse}>search</button>
         </div>
+      <div className='flex justify-between items-center'>
+        <h1 className=' flex justify-start cursor-pointer bg-[#1fb5a9] rounded p-3' onClick={openPopup}>New course</h1>
       </div>
       {
         isSearch ?

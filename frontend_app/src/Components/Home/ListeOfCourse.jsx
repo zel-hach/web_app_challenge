@@ -4,10 +4,9 @@ import axios from 'axios';
 
 export default function ListeOfCourse(props) {
    
-
     return (
-        <div className="w-full flex flex-col gap-5">
-            <div className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-2">
+        <div className="w-full flex-col gap-5">
+            <div className="m-5 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                 {props.courses.map((course, index) => (
                     <Course key={index} course={course} />
                 ))}

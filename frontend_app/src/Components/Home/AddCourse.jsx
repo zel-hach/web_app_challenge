@@ -8,12 +8,21 @@ export default function AddCourse(props) {
   const [schedule,setSchedule] = useState("");
 
 
+ 
+
   const AddCourse = async() => {
+    const dateNow = new Date();
+    const dateOptions = { weekday: 'long' };
+    const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+    setSchedule(dateNow.toLocaleDateString(undefined, dateOptions) + "  " + dateNow.toLocaleTimeString(undefined, timeOptions))
+    const token = sessionStorage.getItem("token");
     try{
       const response = await fetch(`http://localhost:3001/courses`,
         {
           method:'POST',
-          headers:{'Content-type':'application/json'},
+          headers:{
+            Authorization: `Bearer ${token}`,
+            'Content-type':'application/json'},
           body:JSON.stringify({
             title:title,
             description:description,
@@ -47,10 +56,6 @@ export default function AddCourse(props) {
           <div className='flex gap-3 items-center justify-between'>
             <label>name of teacher</label>
             <input className='h-10 p-3' type='text' onChange={(e) => {setTeacher(e.target.value)}}></input>
-          </div>
-          <div className='flex gap-3 items-center justify-between'> 
-            <label>schedule</label>
-            <input className='h-10 p-3' type='text' onChange={(e) => {setSchedule(e.target.value)}}></input>
           </div>
           <div className='flex gap-3 items-center justify-between'>
             <label>description</label>

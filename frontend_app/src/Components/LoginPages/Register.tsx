@@ -28,11 +28,14 @@ export default function Register(props:any) {
         if (response.ok)
           {
             const data = await response.json();
-            console.log(data);
             if(data != 0)
               {
                 props.setLogin(true);
                 navigate('/');
+              }
+              else 
+              {
+                alert("you are already registred")
               }
 
           }
