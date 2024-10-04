@@ -1,6 +1,6 @@
 # web_app_challenge
 # React + TypeScript + Vite + nestJS + TypeORM
-  This project is a full-stack web application developed using React, JavaScript, Vite, NestJS,TypeORM,and MongoDB.
+  This project is a full-stack web application developed using React, JavaScript, Vite, NestJS,TypeORM,and Postgres.
 # Prerequisites
   Docker
   Node.js
